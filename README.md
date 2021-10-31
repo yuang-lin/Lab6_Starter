@@ -1,1 +1,1 @@
-# Lab 6 - Starter
+# Team member: Yuang Lin and Minghui Li
