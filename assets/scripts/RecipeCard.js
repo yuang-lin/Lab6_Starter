@@ -102,6 +102,65 @@ class RecipeCard extends HTMLElement {
     // created in the constructor()
 
     // Part 1 Expose - TODO
+    const image = document.createElement('img');
+    image.setAttribute('alt', searchForKey(data, 'thumbnailUrl'));
+    image.setAttribute('src', searchForKey(data, 'headline'));
+    card.appendChild(image);
+
+    const title = document.createElement('p');
+    title.setAttribute('class', 'title');
+    card.appendChild(title);
+
+    const link = document.createElement('a');
+    const linkurl = getUrl(data);
+    link.setAttribute('href', linkurl);
+    link.textContent = searchForKey(data, 'headline');
+    title.appendChild(link);
+
+    const org = document.createElement('p');
+    org.setAttribute('class', 'organization');
+    org.textContent = getOrganization(data);
+    card.appendChild(org);
+
+    const theRating = document.createElement('div');
+    theRating.setAttribute('class', 'rating');
+    let myRating = searchForKey(data, 'ratingValue');
+    if (myRating) {
+      const span = document.createElement('span');
+      span.textContent = myRating;
+      theRating.appendChild(span);
+      const ratingIcon = document.createElement('img');
+      ratingIcon.setAttribute('src', `./assets/images/icons/${Math.round(myRating)}-star.svg`);
+      ratingIcon.setAttribute('alt', `${Math.round(myRating)} star`);
+      theRating.appendChild(ratingIcon);
+      const reviews = document.createElement('span');
+      reviews.textContent = '(' + searchForKey(data, 'ratingCount') + ')';
+      theRating.appendChild(reviews);
+
+
+    }
+    else {
+      const span = document.createElement('span');
+      span.textContent = 'No Reviews';
+      theRating.appendChild(span);
+    }
+    card.appendChild(theRating);
+
+
+    const time = document.createElement('time');
+    let timeValue = searchForKey(data, 'totalTime');
+    let convertedtime = convertTime(timeValue);
+    time.textContent = convertedtime;
+    card.appendChild(time);
+
+    const ingre = document.createElement('p');
+    ingre.setAttribute('class', 'ingredients');
+    let ingreList = createIngredientList(searchForKey(data, 'recipeIngredient'));
+    ingre.textContent = ingreList;
+    card.appendChild(ingre);
+
+    this.shadowRoot.appendChild(card);
+    this.shadowRoot.appendChild(styleElem);
   }
 }
 
