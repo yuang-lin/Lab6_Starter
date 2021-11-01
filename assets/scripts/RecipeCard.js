@@ -103,8 +103,8 @@ class RecipeCard extends HTMLElement {
 
     // Part 1 Expose - TODO
     const image = document.createElement('img');
-    image.setAttribute('alt', searchForKey(data, 'thumbnailUrl'));
-    image.setAttribute('src', searchForKey(data, 'headline'));
+    image.setAttribute('src', searchForKey(data, 'thumbnailUrl'));
+    image.setAttribute('alt', searchForKey(data, 'headline'));
     card.appendChild(image);
 
     const title = document.createElement('p');
